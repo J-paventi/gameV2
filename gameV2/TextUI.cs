@@ -35,5 +35,35 @@ namespace gameV2
                 Console.WriteLine("Invalid input. Please try again.\n");
             }
         }
+
+        public void ConfirmChoices(PlayerDetails player)
+        {
+            bool validInput = false;
+            while(validInput == false)
+            {
+                Console.WriteLine("Would you like to use these choices? Yes/No");
+                string? confirmationChoice = Console.ReadLine();
+                if (!string.IsNullOrEmpty(confirmationChoice) && confirmationChoice == "Yes")
+                {
+                    Console.WriteLine("You have finished creating your character!");
+                    Console.WriteLine("Press any key to continue...");
+                    validInput = true;
+                    Console.ReadKey();
+                }
+                else if (confirmationChoice == "No")
+                {
+                    player.PlayerClass = null;
+                    player.Sex = null;
+                    player.Race = null;
+                    validInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please choose either 'Yes' or 'No'");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
+            }
+        }
     }
 }

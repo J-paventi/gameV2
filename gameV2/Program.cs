@@ -10,8 +10,17 @@
             menu.StartMenu();
             textUI.Welcome();
             player.Name = textUI.GetPlayerName();
-            player.DisplayPlayerDetails();
-            menu.CharacterBuildMenu(player);
+            //menu.CharacterBuildMenu(player);
+            //Console.Clear();
+            //player.DisplayPlayerDetails();
+            //textUI.ConfirmChoices(player);
+            while(player.PlayerClass == null || player.Sex == null || player.Race == null)
+            {
+                menu.CharacterBuildMenu(player);
+                Console.Clear();
+                player.DisplayPlayerDetails();
+                textUI.ConfirmChoices(player);
+            }
         }
     }
 }

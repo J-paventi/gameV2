@@ -16,6 +16,8 @@ namespace gameV2
         private int maxMana;
         private int currentMana;
         private string race;
+        private string playerClass;
+        private string sex;
 
         // Accessors and Mutators
         public string Name
@@ -40,7 +42,8 @@ namespace gameV2
         public int MaxMana { get => maxMana; set => maxMana = value; }
         public int CurrentMana { get=> currentMana; set => currentMana = value; }
         public string Race { get=> race; set => race = value; }
-
+        public string PlayerClass {  get => playerClass; set => playerClass = value; }
+        public string Sex { get => sex; set => sex = value; }
         public PlayerDetails()
         {
             name = "Player";
@@ -49,7 +52,9 @@ namespace gameV2
             maxMana = 0;
             currentHealth = maxHealth;
             currentMana = maxMana;
-            race = "Uknown"; 
+            race = null;
+            playerClass = null;
+            sex = null;
         }
 
         public void DisplayPlayerDetails()
@@ -60,23 +65,28 @@ namespace gameV2
             Console.WriteLine("| Level: {0, -26} |", Level);
             Console.WriteLine("| Max Health: {0, -21} |", MaxHealth);
             Console.WriteLine("| Max Mana: {0, -23} |", MaxMana);
+            Console.WriteLine("| Sex: {0, -28} |", Sex);
+            Console.WriteLine("| Race: {0, -27} |", Race);
+            Console.WriteLine("| Class: {0, -26} |", PlayerClass);
             Console.WriteLine("-------------------------------------");
         }
 
         public void ChooseRace(PlayerDetails player)
         {
-            Menu menu = new Menu();
+            Menu menu = new();
             menu.ChooseRaceMenu(player);
         }
 
-        public void ChooseClass()
+        public void ChooseClass(PlayerDetails player)
         {
-
+            Menu menu = new();
+            menu.ChooseClass(player);
         }
 
-        public void ChooseSex()
+        public void ChooseSex(PlayerDetails player)
         {
-
+            Menu menu = new();
+            menu.ChooseSex(player);
         }
     }
 }

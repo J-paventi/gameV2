@@ -22,6 +22,7 @@ namespace gameV2
     internal class Menu
     {
         private List<MenuItem> menuItems;
+        private List<string> characterBuild; 
         private List<string> races;
         private List<string> classes;
         private List<string> sexes;
@@ -29,6 +30,7 @@ namespace gameV2
         public Menu()
         {
             menuItems = [];
+            characterBuild = ["Choose Race", "Choose Class", "Choose Sex"];
             races = ["Human", "Elf", "Dwarf"];
             classes = ["Fighter", "Rogue", "Wizard"];
             sexes = ["Male", "Female", "Other"];
@@ -38,7 +40,7 @@ namespace gameV2
         {
             Console.Clear();
             Console.WriteLine("-------------------------------------");
-            for (int i = 0; i < menuItems.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
                 Console.WriteLine($"| {i+1}. {items[i], -30} |");
             }
@@ -85,11 +87,9 @@ namespace gameV2
 
         public void CharacterBuildMenu(PlayerDetails player)
         {
-            bool validInput = false;
-            List<string> buildOptions = new List<string> { "Choose Race", "Choose Class", "Choose Sex" }; 
-            while(!validInput)
+            while(string.IsNullOrEmpty(player.Name) || string.IsNullOrEmpty(player.PlayerClass) || string.IsNullOrEmpty(player.Sex))
             {
-                Display(buildOptions);
+                Display(characterBuild);
                 if(int.TryParse(Console.ReadLine(), out int result))
                 {
                     switch (result)
@@ -98,13 +98,12 @@ namespace gameV2
                             player.ChooseRace(player);
                             break;
                         case 2:
-                            player.ChooseClass();
+                            player.ChooseClass(player);
                             break;
                         case 3:
-                            player.ChooseSex();
+                            player.ChooseSex(player);
                             break;
                     }
-                    validInput = true;
                 }
                 else
                 {
@@ -126,7 +125,61 @@ namespace gameV2
                 {
                     Console.WriteLine($"You have chosen: {races[result - 1]}");
                     player.Race = races[result - 1];
-                    validInput = true; 
+                    Console.ReadKey();
+                    validInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+        }
+
+        public void ChooseClass(PlayerDetails player)
+        {
+            bool validInput = false;
+            while(!validInput)
+            {
+                Display(classes);
+                if (int.TryParse(Console.ReadLine(), out int result) && result > 0 && result <= classes.Count)
+                {
+                    Console.WriteLine($"You have chosen {classes[result - 1]}");
+                    player.PlayerClass = classes[result - 1];
+                    Console.ReadKey();
+                    validInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+        }
+
+        public void ChooseSex(PlayerDetails player)
+        {
+            bool validInput = false;
+            while(!validInput)
+            {
+                Display(sexes);
+                if(int.TryParse(Console.ReadLine(), out int result) && result > 0 && result <= sexes.Count)
+                {
+                    Console.WriteLine($"You have chosen {sexes[result - 1]}");
+                    player.Sex = sexes[result - 1];
+                    Console.ReadKey();
+                    validInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
                 }
             }
         }
