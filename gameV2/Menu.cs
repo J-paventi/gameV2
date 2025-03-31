@@ -22,18 +22,25 @@ namespace gameV2
     internal class Menu
     {
         private List<MenuItem> menuItems;
+        private List<string> races;
+        private List<string> classes;
+        private List<string> sexes;
+
         public Menu()
         {
-            menuItems = new List<MenuItem>();
+            menuItems = [];
+            races = ["Human", "Elf", "Dwarf"];
+            classes = ["Fighter", "Rogue", "Wizard"];
+            sexes = ["Male", "Female", "Other"];
         }
 
-        public void Display()
+        public void Display(List <string> items)
         {
             Console.Clear();
             Console.WriteLine("-------------------------------------");
             for (int i = 0; i < menuItems.Count; i++)
             {
-                Console.WriteLine($"| {i+1}. {menuItems[i].Title, -30} |");
+                Console.WriteLine($"| {i+1}. {items[i], -30} |");
             }
             Console.WriteLine("-------------------------------------");
         }
@@ -48,13 +55,80 @@ namespace gameV2
 
         public void StartMenu()
         {
+            bool validInput = false;
             menuItems.Add(new MenuItem("New Game", NewGame));
             menuItems.Add(new MenuItem("Load Game", LoadGame));
             menuItems.Add(new MenuItem("Exit", Exit));
-            Display();
-            string choice;
-            int.TryParse(choice = Console.ReadLine(), out int result);
-            Execute(result - 1);
+            List<string> menuTitles = []; 
+            foreach(var item in menuItems)
+            {
+                menuTitles.Add(item.Title);
+            }
+            while(!validInput)
+            {
+                Display(menuTitles);
+                int.TryParse(Console.ReadLine(), out int result);
+                if (result > 0 && result <= menuItems.Count)
+                {
+                    validInput = true;
+                    Execute(result - 1);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+        }
+
+        public void CharacterBuildMenu(PlayerDetails player)
+        {
+            bool validInput = false;
+            List<string> buildOptions = new List<string> { "Choose Race", "Choose Class", "Choose Sex" }; 
+            while(!validInput)
+            {
+                Display(buildOptions);
+                if(int.TryParse(Console.ReadLine(), out int result))
+                {
+                    switch (result)
+                    {
+                        case 1:
+                            player.ChooseRace(player);
+                            break;
+                        case 2:
+                            player.ChooseClass();
+                            break;
+                        case 3:
+                            player.ChooseSex();
+                            break;
+                    }
+                    validInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+        }
+
+        public void ChooseRaceMenu(PlayerDetails player)
+        {
+            bool validInput = false;
+            while(!validInput)
+            {
+                Display(races);
+                if(int.TryParse(Console.ReadLine(), out int result) && result > 0 && result <= races.Count)
+                {
+                    Console.WriteLine($"You have chosen: {races[result - 1]}");
+                    player.Race = races[result - 1];
+                    validInput = true; 
+                }
+            }
         }
 
         public void NewGame()

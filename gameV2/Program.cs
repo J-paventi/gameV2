@@ -6,10 +6,12 @@
         {
             TextUI textUI = new();
             Menu menu = new();
-            PlayerDetails playerDetails = new();
+            PlayerDetails player = new();
             menu.StartMenu();
             textUI.Welcome();
-            playerDetails.Name = textUI.GetPlayerName();
+            player.Name = textUI.GetPlayerName();
+            player.DisplayPlayerDetails();
+            menu.CharacterBuildMenu(player);
         }
     }
 }
