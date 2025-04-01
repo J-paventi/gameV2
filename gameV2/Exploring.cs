@@ -11,7 +11,7 @@ namespace gameV2
         private List<string> townEvent; 
         public Exploring(PlayerDetails player)
         {
-            townEvent = ["Combat Encounter", "Random Treasure", "Social Encounter", "Nothing Happens"];
+            townEvent = ["Combat Encounter", "Random Treasure", "Social Encounter", "Nothing Happens", "Bad Luck"];
         }
 
         public void Town(PlayerDetails player)
@@ -56,6 +56,18 @@ namespace gameV2
                         if(player.CurrentMana > player.MaxMana)
                         {
                             player.CurrentMana = player.MaxMana;
+                        }
+                        player.DisplayPlayerDetails();
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("You are clipped by a passing carriage.");
+                        player.CurrentHealth -= 10;
+                        if(player.CurrentHealth <= 0)
+                        {
+                            Console.WriteLine("You have perished! But not really. This just isn't implemented yet.");
                         }
                         player.DisplayPlayerDetails();
                         Console.WriteLine("Press any key to continue...");
