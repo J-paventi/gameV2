@@ -56,6 +56,8 @@ namespace gameV2
             if (player.CurrentHealth <= 0)
             {
                 Console.WriteLine("You have perished! But not really. This just isn't implemented yet.");
+                player.CurrentHealth = player.MaxHealth;
+                Console.WriteLine("Let's just put you back to full health and continue on :)");
             }
             player.DisplayPlayerDetails();
             Console.WriteLine("Press any key to continue...");
