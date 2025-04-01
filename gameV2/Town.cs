@@ -14,7 +14,7 @@ namespace gameV2
         {
             Console.WriteLine("Not implemented yet. These thugs will get you next time!");
             Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            Console.ReadKey(); 
         }
 
         public void GenerateTreasure(PlayerDetails player)
