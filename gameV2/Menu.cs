@@ -9,35 +9,25 @@ using System.Text.Json;
 
 namespace gameV2
 {
-    internal class MenuItem
-    {
-        public string Title { get; set; }
-        public Action Action { get; set; }
-
-        public MenuItem(string title, Action action)
-        {
-            Title = title;
-            Action = action;
-        }
-    }
-
     internal class Menu
     {
-        private List<MenuItem> menuItems;
+        private List<string> startMenu; 
         private List<string> characterBuild; 
         private List<string> races;
         private List<string> classes;
         private List<string> sexes;
         private List<string> gameMenu;
+        private List<string> exploreMenu;
 
         public Menu()
         {
-            menuItems = [];
+            startMenu = ["New Game", "Load Game", "Exit Game"];
             characterBuild = ["Choose Race", "Choose Class", "Choose Sex"];
             races = ["Human", "Elf", "Dwarf"];
             classes = ["Fighter", "Rogue", "Wizard"];
             sexes = ["Male", "Female", "Other"];
             gameMenu = ["Check Status", "Visit Shops", "Go to the Tavern", "Explore", "Save Game", "Exit"];
+            exploreMenu = ["Explore Town", "Explore Forest", "Explore Dungeon", "Quit Exploring"];
         }
 
         public void Display(List <string> items)
@@ -51,33 +41,29 @@ namespace gameV2
             Console.WriteLine("-------------------------------------");
         }
 
-        public void Execute(int index)
-        {
-            if(index >= 0 && index < menuItems.Count)
-            {
-                menuItems[index].Action.Invoke(); 
-            }
-        }
-
         public void StartMenu()
         {
             bool validInput = false;
-            menuItems.Add(new MenuItem("New Game", NewGame));
-            menuItems.Add(new MenuItem("Load Game", LoadGame));
-            menuItems.Add(new MenuItem("Exit", Exit));
-            List<string> menuTitles = []; 
-            foreach(var item in menuItems)
-            {
-                menuTitles.Add(item.Title);
-            }
             while(!validInput)
             {
-                Display(menuTitles);
-                int.TryParse(Console.ReadLine(), out int result);
-                if (result > 0 && result <= menuItems.Count)
+                Display(startMenu);
+                if (int.TryParse(Console.ReadLine(), out int result) && result > 0 && result <= startMenu.Count)
                 {
-                    validInput = true;
-                    Execute(result - 1);
+                    switch(result)
+                    {
+                        case 1:
+                            NewGame();
+                            validInput = true;
+                            break;
+                        case 2:
+                            LoadGame();
+                            validInput= true;
+                            break;
+                        case 3:
+                            Exit();
+                            validInput = true;
+                            break;
+                    }
                 }
                 else
                 {
@@ -232,9 +218,44 @@ namespace gameV2
             }
         }
 
+        public void ExploringMenu(PlayerDetails player)
+        {
+            bool quitExploring = false;
+            Exploring exploring = new(player);
+            Menu menu = new();
+            while(!quitExploring)
+            {
+                Display(exploreMenu);
+                if(int.TryParse(Console.ReadLine(), out int result) && result > 0 && result <= exploreMenu.Count)
+                {
+                    switch(result)
+                    {
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            menu.GameMenu(player);
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+        }
+
         public void NewGame()
         {
             Console.WriteLine("New Game");
+            TextUI textUI = new();
+            textUI.Welcome();
         }
 
         public void SaveGame(PlayerDetails player)
@@ -264,6 +285,7 @@ namespace gameV2
             {
                 Console.WriteLine("Save file not found. Press any key to return to the main menu.");
                 Console.ReadKey();
+                Console.Clear(); 
                 StartMenu();
             }
         }

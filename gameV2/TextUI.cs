@@ -82,8 +82,8 @@ namespace gameV2
 
         public void Explore(PlayerDetails player)
         {
-            Console.WriteLine("Not implemented yet");
-            Console.WriteLine("Press any key to continue...");
+            Menu menu = new();
+            menu.ExploringMenu(player); 
             Console.ReadKey();
         }
     }

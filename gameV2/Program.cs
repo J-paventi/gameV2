@@ -11,7 +11,7 @@ namespace gameV2
             Menu menu = new();
             PlayerDetails player = new();
             menu.StartMenu();
-            textUI.Welcome();
+            //textUI.Welcome();
             player.Name = textUI.GetPlayerName();
             while(player.PlayerClass == null || player.Sex == null || player.Race == null)
             {
