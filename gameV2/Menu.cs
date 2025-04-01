@@ -233,11 +233,12 @@ namespace gameV2
                 {
                     switch(result)
                     {
-                        case 1:
+                        case 1:         // town
+                            exploring.Town(player); 
                             break;
-                        case 2:
+                        case 2:         // forest
                             break;
-                        case 3:
+                        case 3:         // dungeon
                             break;
                         case 4:
                             menu.GameMenu(player);
