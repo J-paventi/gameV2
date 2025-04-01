@@ -13,16 +13,22 @@ namespace gameV2
         public void TownCombat(PlayerDetails player)
         {
             Console.WriteLine("Not implemented yet. These thugs will get you next time!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
 
         public void GenerateTreasure(PlayerDetails player)
         {
             Console.WriteLine("Not implemented yet. Seems like the treasure was a mirage.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
 
         public void TownSocialEvent(PlayerDetails player)
         {
             Console.WriteLine("Not implemented yet. These people are just dummies right now.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
 
         public void TownNothingHappened(PlayerDetails player)

@@ -8,10 +8,13 @@ namespace gameV2
 {
     internal class Exploring
     {
-        private List<string> townEvent; 
+        private List<string> townEvent;
+        private List<int> townEventWeights;
+
         public Exploring(PlayerDetails player)
         {
             townEvent = ["Combat Encounter", "Random Treasure", "Social Encounter", "Nothing Happens", "Bad Luck"];
+            townEventWeights = [30, 15, 25, 20, 10];
         }
 
         public void Town(PlayerDetails player)
@@ -21,9 +24,10 @@ namespace gameV2
             Town town = new(); 
             int randomSelection = 0;
             int count = 0;
+
             while(count < 3)
             {
-                randomSelection = randomEvent.Next(0, townEvent.Count);
+                randomSelection = GetWeightedRandomEvent();
                 string selectedEvent = townEvent[randomSelection];
                 Console.Clear();
                 Console.WriteLine($"Event {count + 1}: {selectedEvent}");
@@ -54,6 +58,30 @@ namespace gameV2
                         break;
                 }
             }
+        }
+
+        private int GetWeightedRandomEvent()
+        {
+            Random random = new();
+            int totalWeight = 0;
+            foreach(int weight in townEventWeights)
+            {
+                totalWeight += weight;
+            }
+
+            int randomValue = random.Next(0, totalWeight);
+            int cumulativeWeight = 0;
+
+            for(int i = 0; i < townEventWeights.Count; i++)
+            {
+                cumulativeWeight += townEventWeights[i];
+                if(randomValue < cumulativeWeight)
+                {
+                    return i;
+                }
+            }
+
+            return 0;
         }
     }
 }
