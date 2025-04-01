@@ -46,32 +46,11 @@ namespace gameV2
                         break;
                     case 3:
                         Console.Clear();
-                        Console.WriteLine("You take some time to recover.");
-                        player.CurrentHealth += 10;
-                        if(player.CurrentHealth > player.MaxHealth)
-                        {
-                            player.CurrentHealth = player.MaxHealth;
-                        }
-                        player.CurrentMana += 10;
-                        if(player.CurrentMana > player.MaxMana)
-                        {
-                            player.CurrentMana = player.MaxMana;
-                        }
-                        player.DisplayPlayerDetails();
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
+                        town.TownNothingHappened(player);
                         break;
                     case 4:
                         Console.Clear();
-                        Console.WriteLine("You are clipped by a passing carriage.");
-                        player.CurrentHealth -= 10;
-                        if(player.CurrentHealth <= 0)
-                        {
-                            Console.WriteLine("You have perished! But not really. This just isn't implemented yet.");
-                        }
-                        player.DisplayPlayerDetails();
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
+                        town.TownBadLuck(player);
                         break;
                 }
             }

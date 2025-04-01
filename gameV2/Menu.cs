@@ -269,6 +269,7 @@ namespace gameV2
             string filename = $"savegame_{player.Name}.json";
             File.WriteAllText(filename, gameState);
             Console.WriteLine("Game Saved!");
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
 
@@ -290,6 +291,7 @@ namespace gameV2
             else
             {
                 Console.WriteLine("Save file not found. Press any key to return to the main menu.");
+                Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
                 Console.Clear(); 
                 StartMenu();
@@ -300,6 +302,8 @@ namespace gameV2
         {
             Console.Clear();
             Console.WriteLine("Exiting game...");
+            Console.WriteLine("Come back soon. The world of Orthan needs heroes like you!");
+            Console.ReadKey();
             Environment.Exit(0);
         }
     }
