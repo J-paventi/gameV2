@@ -63,8 +63,8 @@ namespace gameV2
             Console.WriteLine("| Player Details                    |");
             Console.WriteLine("| Name: {0, -27} |", Name);
             Console.WriteLine("| Level: {0, -26} |", Level);
-            Console.WriteLine("| Max Health: {0, -21} |", MaxHealth);
-            Console.WriteLine("| Max Mana: {0, -23} |", MaxMana);
+            Console.WriteLine($"| Health: {CurrentHealth}/{MaxHealth, -21} |");
+            Console.WriteLine($"| Mana: {CurrentMana}/{MaxMana, -25} |");
             Console.WriteLine("| Sex: {0, -28} |", Sex);
             Console.WriteLine("| Race: {0, -27} |", Race);
             Console.WriteLine("| Class: {0, -26} |", PlayerClass);

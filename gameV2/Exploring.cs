@@ -10,6 +10,7 @@ namespace gameV2
     {
         public Exploring(PlayerDetails player)
         {
+
         }
 
         public void ExploringUI(PlayerDetails player)

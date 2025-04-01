@@ -30,7 +30,7 @@ namespace gameV2
             exploreMenu = ["Explore Town", "Explore Forest", "Explore Dungeon", "Quit Exploring"];
         }
 
-        public void Display(List <string> items)
+        public void Display(List<string> items)
         {
             Console.Clear();
             Console.WriteLine("-------------------------------------");
@@ -115,6 +115,7 @@ namespace gameV2
                 {
                     Console.WriteLine($"You have chosen: {races[result - 1]}");
                     player.Race = races[result - 1];
+                    Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                     validInput = true;
                 }
@@ -138,6 +139,7 @@ namespace gameV2
                 {
                     Console.WriteLine($"You have chosen {classes[result - 1]}");
                     player.PlayerClass = classes[result - 1];
+                    Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                     validInput = true;
                 }
@@ -161,6 +163,7 @@ namespace gameV2
                 {
                     Console.WriteLine($"You have chosen {sexes[result - 1]}");
                     player.Sex = sexes[result - 1];
+                    Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                     validInput = true;
                 }
@@ -279,6 +282,8 @@ namespace gameV2
                 PlayerDetails player = JsonSerializer.Deserialize<PlayerDetails>(gameState);
                 Console.WriteLine("Game Loaded!");
                 player.DisplayPlayerDetails();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
                 GameMenu(player);
             }
             else
