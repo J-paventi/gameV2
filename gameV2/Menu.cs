@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace gameV2
 {
@@ -214,7 +215,7 @@ namespace gameV2
                             textUI.Explore(player);
                             break;
                         case 5:
-                            menu.SaveGame();
+                            menu.SaveGame(player);
                             break;
                         case 6:
                             menu.Exit();
@@ -236,19 +237,35 @@ namespace gameV2
             Console.WriteLine("New Game");
         }
 
-        public void SaveGame()
+        public void SaveGame(PlayerDetails player)
         {
             Console.WriteLine("Saving Game...");
-            Thread.Sleep(1000);
-            string gameState = "Fake Game State";
-            File.WriteAllText("gameState.txt", gameState);
+            string gameState = JsonSerializer.Serialize(player);
+            string filename = $"savegame_{player.Name}.json";
+            File.WriteAllText(filename, gameState);
             Console.WriteLine("Game Saved!");
             Console.ReadKey();
         }
 
         public void LoadGame()
         {
-            Console.WriteLine("Load Game");
+            Console.WriteLine("Enter the name of the file to load. It should be in the format of:");
+            Console.WriteLine("savegame_[player's name]");
+            string filename = Console.ReadLine();
+            if(File.Exists($"{filename}.json"))
+            {
+                string gameState = File.ReadAllText($"{filename}.json");
+                PlayerDetails player = JsonSerializer.Deserialize<PlayerDetails>(gameState);
+                Console.WriteLine("Game Loaded!");
+                player.DisplayPlayerDetails();
+                GameMenu(player);
+            }
+            else
+            {
+                Console.WriteLine("Save file not found. Press any key to return to the main menu.");
+                Console.ReadKey();
+                StartMenu();
+            }
         }
 
         public void Exit()
