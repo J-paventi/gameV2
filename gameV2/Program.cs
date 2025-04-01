@@ -4,7 +4,7 @@ namespace gameV2
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             bool gameRunning = true;
             TextUI textUI = new();
