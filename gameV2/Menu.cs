@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace gameV2
@@ -26,6 +27,7 @@ namespace gameV2
         private List<string> races;
         private List<string> classes;
         private List<string> sexes;
+        private List<string> gameMenu;
 
         public Menu()
         {
@@ -34,6 +36,7 @@ namespace gameV2
             races = ["Human", "Elf", "Dwarf"];
             classes = ["Fighter", "Rogue", "Wizard"];
             sexes = ["Male", "Female", "Other"];
+            gameMenu = ["Check Status", "Visit Shops", "Go to the Tavern", "Explore", "Save Game", "Exit"];
         }
 
         public void Display(List <string> items)
@@ -184,6 +187,50 @@ namespace gameV2
             }
         }
 
+        public void GameMenu(PlayerDetails player)
+        {
+            bool validInput = false;
+            TextUI textUI = new();
+            Menu menu = new();
+            while(!validInput)
+            {
+                Display(gameMenu);
+                if (int.TryParse(Console.ReadLine(), out int result) && result > 0 && result <= gameMenu.Count)
+                {
+                    switch (result)
+                    {
+                        case 1:
+                            player.DisplayPlayerDetails();
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        case 2:
+                            textUI.DisplayShops(player);
+                            break;
+                        case 3:
+                            textUI.VisitTavern(player);
+                            break;
+                        case 4:
+                            textUI.Explore(player);
+                            break;
+                        case 5:
+                            menu.SaveGame();
+                            break;
+                        case 6:
+                            menu.Exit();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+        }
+
         public void NewGame()
         {
             Console.WriteLine("New Game");
@@ -192,9 +239,11 @@ namespace gameV2
         public void SaveGame()
         {
             Console.WriteLine("Saving Game...");
+            Thread.Sleep(1000);
             string gameState = "Fake Game State";
             File.WriteAllText("gameState.txt", gameState);
             Console.WriteLine("Game Saved!");
+            Console.ReadKey();
         }
 
         public void LoadGame()

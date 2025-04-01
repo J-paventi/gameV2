@@ -65,5 +65,26 @@ namespace gameV2
                 }
             }
         }
+
+        public void DisplayShops(PlayerDetails player)
+        {
+            Console.WriteLine("Not implemented yet");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        public void VisitTavern(PlayerDetails player)
+        {
+            Console.WriteLine("Not implemented yet");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        public void Explore(PlayerDetails player)
+        {
+            Console.WriteLine("Not implemented yet");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
     }
 }
