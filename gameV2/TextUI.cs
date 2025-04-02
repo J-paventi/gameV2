@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace gameV2
 {
@@ -85,6 +88,19 @@ namespace gameV2
             Menu menu = new();
             menu.ExploringMenu(player); 
             Console.ReadKey();
+        }
+
+        public void CombatTextUI(PlayerDetails player, Enemies enemy)
+        {
+            Console.WriteLine("-------------------------------------------------------------------------");
+            Console.WriteLine($"| Player Details                    | Enemy Details {"", -19} |");
+            Console.WriteLine($"| Name: {player.Name,-27} | Name: {enemy.Name, -27} |");
+            Console.WriteLine($"| Level: {player.Level,-26} | Level: {enemy.Level, -26} |");
+            Console.WriteLine($"| Health: {player.CurrentHealth,-3}/{player.MaxHealth,-21} | " +
+                $"Health: {enemy.CurrentHealth, -3}/{enemy.MaxHealth, -21} |");
+            Console.WriteLine($"| Mana: {player.CurrentMana,-3} / {player.MaxMana,-21} | {"",-33} |");
+            Console.WriteLine("-------------------------------------------------------------------------");
+
         }
     }
 }

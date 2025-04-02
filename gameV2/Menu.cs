@@ -18,6 +18,9 @@ namespace gameV2
         private List<string> sexes;
         private List<string> gameMenu;
         private List<string> exploreMenu;
+        private List<string> combatMenu = ["Attack", "Cast Spell", "Use Ability", "Use Item", "Run"];
+
+        public List<string> CombatMenu {  get; }
 
         public Menu()
         {
@@ -28,6 +31,7 @@ namespace gameV2
             sexes = ["Male", "Female", "Other"];
             gameMenu = ["Check Status", "Visit Shops", "Go to the Tavern", "Explore", "Save Game", "Exit"];
             exploreMenu = ["Explore Town", "Explore Forest", "Explore Dungeon", "Quit Exploring"];
+            CombatMenu = combatMenu;
         }
 
         public void Display(List<string> items)
@@ -237,8 +241,10 @@ namespace gameV2
                             exploring.Town(player); 
                             break;
                         case 2:         // forest
+                            exploring.Forest(player);
                             break;
                         case 3:         // dungeon
+                            exploring.Dungeon(player); 
                             break;
                         case 4:
                             menu.GameMenu(player);
@@ -253,6 +259,13 @@ namespace gameV2
                     Console.Clear();
                 }
             }
+        }
+
+        public void GenerateCombatMenu(PlayerDetails player, Enemies enemy)
+        {
+            TextUI textUI = new();
+            Display(CombatMenu);
+            textUI.CombatTextUI(player, enemy);
         }
 
         public void NewGame()

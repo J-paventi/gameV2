@@ -60,6 +60,24 @@ namespace gameV2
             }
         }
 
+        public void Forest(PlayerDetails player)
+        {
+            Console.Clear();
+            Console.WriteLine("The forest is too spooky! You decide to turn back.");
+            Console.WriteLine("It is not implemented yet. Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+        public void Dungeon(PlayerDetails player)
+        {
+            Console.Clear();
+            Console.WriteLine("The door is locked, with a sign reading 'Under Construction'.");
+            Console.WriteLine("It is not implemented yet. Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
         private int GetWeightedRandomEvent()
         {
             Random random = new();

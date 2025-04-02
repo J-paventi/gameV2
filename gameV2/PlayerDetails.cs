@@ -35,7 +35,6 @@ namespace gameV2
                 }
             }
         }
-
         public int Level { get => level; set => level = value; }
         public int MaxHealth { get => maxHealth; set => maxHealth = value; }
         public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
@@ -46,15 +45,15 @@ namespace gameV2
         public string Sex { get => sex; set => sex = value; }
         public PlayerDetails()
         {
-            name = "Player";
-            level = 1;
-            maxHealth = 100;
-            maxMana = 0;
-            currentHealth = maxHealth;
-            currentMana = maxMana;
-            race = null;
-            playerClass = null;
-            sex = null;
+            Name = "Player";
+            Level = 1;
+            MaxHealth = 100;
+            MaxMana = 0;
+            CurrentHealth = maxHealth;
+            CurrentMana = maxMana;
+            Race = null;
+            PlayerClass = null;
+            Sex = null;
         }
 
         public void DisplayPlayerDetails()

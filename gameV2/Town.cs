@@ -8,13 +8,23 @@ namespace gameV2
 {
     internal class Town
     {
-        public Town() { }
+        private List<Enemies> townEnemiesBelow5;
+        private List<int> townEnemyWeights;
+
+        public Town() 
+        {
+            townEnemiesBelow5 = Enemies.GetTownEnemyListBelow5();
+            townEnemyWeights = [25, 10, 50, 15];
+        }
 
         public void TownCombat(PlayerDetails player)
         {
-            Console.WriteLine("Not implemented yet. These thugs will get you next time!");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey(); 
+            if(player.Level <= 5)
+            {
+                Combat combat = new(player);
+                Enemies enemyToFight = combat.GetCombatWeight(townEnemiesBelow5, townEnemyWeights);
+                combat.TownCombatEncounter(player, enemyToFight);
+            }
         }
 
         public void GenerateTreasure(PlayerDetails player)
