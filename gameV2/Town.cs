@@ -9,12 +9,12 @@ namespace gameV2
     internal class Town
     {
         private List<Enemies> townEnemiesBelow5;
-        private List<int> townEnemyWeights;
+        private List<int> townEnemyBelow5Weights;
 
         public Town() 
         {
             townEnemiesBelow5 = Enemies.GetTownEnemyListBelow5();
-            townEnemyWeights = [25, 10, 50, 15];
+            townEnemyBelow5Weights = [25, 20, 50, 5];
         }
 
         public void TownCombat(PlayerDetails player)
@@ -22,7 +22,7 @@ namespace gameV2
             if(player.Level <= 5)
             {
                 Combat combat = new(player);
-                Enemies enemyToFight = combat.GetCombatWeight(townEnemiesBelow5, townEnemyWeights);
+                Enemies enemyToFight = combat.GetCombatWeight(townEnemiesBelow5, townEnemyBelow5Weights);
                 combat.TownCombatEncounter(player, enemyToFight);
             }
         }

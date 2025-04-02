@@ -112,6 +112,7 @@ namespace gameV2
         public void ChooseRaceMenu(PlayerDetails player)
         {
             bool validInput = false;
+            TextUI textUI = new();
             while(!validInput)
             {
                 Display(races);
@@ -119,9 +120,27 @@ namespace gameV2
                 {
                     Console.WriteLine($"You have chosen: {races[result - 1]}");
                     player.Race = races[result - 1];
+                    validInput = true;
+                    if(player.Race == "Human")
+                    {
+                        player.MaxMana += 30;
+                        player.CurrentMana = player.MaxMana;
+                        textUI.DisplayHumanDetails();
+                    }
+                    else if(player.Race == "Elf")
+                    {
+                        player.MaxMana += 50;
+                        player.CurrentMana = player.MaxMana;
+                        textUI.DisplayElfDetails();
+                    }
+                    else if(player.Race == "Dwarf")
+                    {
+                        player.MaxHealth += 50;
+                        player.CurrentHealth = player.MaxHealth;
+                        textUI.DisplayDwarfDetails();
+                    }
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
-                    validInput = true;
                 }
                 else
                 {
@@ -136,16 +155,39 @@ namespace gameV2
         public void ChooseClass(PlayerDetails player)
         {
             bool validInput = false;
-            while(!validInput)
+            TextUI textUI = new();
+            while (!validInput)
             {
                 Display(classes);
                 if (int.TryParse(Console.ReadLine(), out int result) && result > 0 && result <= classes.Count)
                 {
                     Console.WriteLine($"You have chosen {classes[result - 1]}");
                     player.PlayerClass = classes[result - 1];
+                    validInput = true;
+                    if(player.PlayerClass == "Fighter")
+                    {
+                        player.MaxHealth += 50;
+                        player.MaxMana += 20;
+                        player.CurrentHealth = player.MaxHealth;
+                        player.CurrentMana = player.MaxMana;
+                        textUI.DisplayFighterDetails();
+                    }
+                    else if(player.PlayerClass == "Rogue")
+                    {
+                        player.MaxHealth += 25;
+                        player.MaxMana += 25;
+                        player.CurrentHealth = player.MaxHealth;
+                        player.CurrentMana = player.MaxMana;
+                        textUI.DisplayRogueDetails();
+                    }
+                    else if(player.PlayerClass == "Wizard")
+                    {
+                        player.MaxMana += 100;
+                        player.CurrentMana = player.MaxMana;
+                        textUI.DisplayWizardDetails();
+                    }
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
-                    validInput = true;
                 }
                 else
                 {
@@ -162,6 +204,9 @@ namespace gameV2
             bool validInput = false;
             while(!validInput)
             {
+                Console.WriteLine("Choosing your sex has no mechanical impact on combat.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
                 Display(sexes);
                 if(int.TryParse(Console.ReadLine(), out int result) && result > 0 && result <= sexes.Count)
                 {
