@@ -40,7 +40,7 @@ namespace gameV2
         {
             Menu menu = new();
             bool combatFinished = false;
-            Console.WriteLine($"A {enemy.Name} has appeared! {player.Name}, prepare to fight!");
+            Console.WriteLine($"A {enemy.Name} has appeared! Prepare to fight, {player.Name}!");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
 
@@ -53,6 +53,14 @@ namespace gameV2
                     {
                         case 1:
                             Console.WriteLine("You attack!");
+                            player.PlayerAttack(player, enemy);
+                            if(enemy.CurrentHealth <= 0)
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"You have defeated {enemy.Name}!");
+                                Console.WriteLine("Press any key to continue...");
+                                combatFinished = true;
+                            }
                             Console.ReadKey();
                             break;
                         case 2:

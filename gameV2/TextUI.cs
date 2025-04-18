@@ -6,6 +6,8 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static gameV2.Armour;
+using static gameV2.Weapons.Swords;
 
 namespace gameV2
 {
@@ -119,6 +121,24 @@ namespace gameV2
                 {
                     Console.WriteLine("You have finished creating your character!");
                     Console.WriteLine("Press any key to continue...");
+                    string? chosenClass = player.PlayerClass;
+                    switch(chosenClass)
+                    {
+                        case "Fighter":
+                            BasicSword sword = new();
+                            Breastplate armour = new();
+                            player.EquipWeapon(player, sword);
+                            player.EquipArmour(player, armour);
+                            break;
+                        case "Rogue":
+                            player.EquippedWeapon = "Basic Dagger";
+                            player.EquippedArmour = "Leather Armour";
+                            break;
+                        case "Wizard":
+                            player.EquippedWeapon = "Quarterstaff";
+                            player.EquippedArmour = "Wizard Robe";
+                            break;
+                    }
                     validInput = true;
                     Console.ReadKey();
                 }

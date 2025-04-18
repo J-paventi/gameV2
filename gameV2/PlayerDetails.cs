@@ -18,6 +18,10 @@ namespace gameV2
         private string race;
         private string playerClass;
         private string sex;
+        private string equippedWeapon;
+        private string equippedArmour;
+        private int weaponDmgModifier;
+        private int armourDmgReduction;
 
         // Accessors and Mutators
         public string Name
@@ -43,6 +47,11 @@ namespace gameV2
         public string Race { get=> race; set => race = value; }
         public string PlayerClass {  get => playerClass; set => playerClass = value; }
         public string Sex { get => sex; set => sex = value; }
+        public string EquippedWeapon { get => equippedWeapon; set => equippedWeapon = value; }
+        public string EquippedArmour { get => equippedArmour; set => equippedArmour = value; }
+        public int WeaponDmgModifier { get => weaponDmgModifier; set => weaponDmgModifier = value; }
+        public int ArmourDmgReduction { get => armourDmgReduction; set => armourDmgReduction = value; }
+
         public PlayerDetails()
         {
             Name = "Player";
@@ -54,6 +63,8 @@ namespace gameV2
             Race = null;
             PlayerClass = null;
             Sex = null;
+            EquippedWeapon = "N/A";
+            EquippedArmour = "N/A";
         }
 
         public void DisplayPlayerDetails()
@@ -67,6 +78,8 @@ namespace gameV2
             Console.WriteLine($"| Sex: {Sex, -28} |");
             Console.WriteLine($"| Race: {Race, -27} |");
             Console.WriteLine($"| Class: {PlayerClass, -26} |");
+            Console.WriteLine($"| Equipped Weapon: {EquippedWeapon,-16} |");
+            Console.WriteLine($"| Equipped Armout: {EquippedArmour,-16} |");
             Console.WriteLine("-------------------------------------");
         }
 
@@ -86,6 +99,25 @@ namespace gameV2
         {
             Menu menu = new();
             menu.ChooseSex(player);
+        }
+
+        public void EquipWeapon(PlayerDetails player, Weapons weaponName)
+        {
+            player.EquippedWeapon = weaponName.Name;
+            player.WeaponDmgModifier = weaponName.WeaponDamage;
+            //Console.WriteLine($"Player's weapon damage is {player.WeaponDmgModifier}");
+        }
+
+        public void EquipArmour(PlayerDetails player, Armour armourName)
+        {
+            player.EquippedArmour = armourName.Name;
+            player.ArmourDmgReduction = armourName.DamageReduction;
+            //Console.WriteLine($"Player's armour gives {player.ArmourDmgReduction} reduction.");
+        }
+
+        public void PlayerAttack(PlayerDetails player, Enemies enemy)
+        {
+            enemy.CurrentHealth -= player.WeaponDmgModifier; 
         }
     }
 }
