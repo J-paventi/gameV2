@@ -170,6 +170,7 @@ namespace gameV2
                         player.MaxMana += 20;
                         player.CurrentHealth = player.MaxHealth;
                         player.CurrentMana = player.MaxMana;
+                        player.Strength += 5;
                         textUI.DisplayFighterDetails();
                     }
                     else if(player.PlayerClass == "Rogue")
@@ -178,12 +179,14 @@ namespace gameV2
                         player.MaxMana += 25;
                         player.CurrentHealth = player.MaxHealth;
                         player.CurrentMana = player.MaxMana;
+                        player.Strength += 3;
                         textUI.DisplayRogueDetails();
                     }
                     else if(player.PlayerClass == "Wizard")
                     {
                         player.MaxMana += 100;
                         player.CurrentMana = player.MaxMana;
+                        player.Strength += 1;
                         textUI.DisplayWizardDetails();
                     }
                     Console.WriteLine("Press any key to continue...");

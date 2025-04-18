@@ -22,6 +22,7 @@ namespace gameV2
         private string equippedArmour;
         private int weaponDmgModifier;
         private int armourDmgReduction;
+        private int strength;
 
         // Accessors and Mutators
         public string Name
@@ -51,6 +52,7 @@ namespace gameV2
         public string EquippedArmour { get => equippedArmour; set => equippedArmour = value; }
         public int WeaponDmgModifier { get => weaponDmgModifier; set => weaponDmgModifier = value; }
         public int ArmourDmgReduction { get => armourDmgReduction; set => armourDmgReduction = value; }
+        public int Strength { get => strength; set => strength = value; }
 
         public PlayerDetails()
         {
@@ -115,9 +117,22 @@ namespace gameV2
             //Console.WriteLine($"Player's armour gives {player.ArmourDmgReduction} reduction.");
         }
 
-        public void PlayerAttack(PlayerDetails player, Enemies enemy)
+        public int PlayerAttack(PlayerDetails player, Enemies enemy)
         {
-            enemy.CurrentHealth -= player.WeaponDmgModifier; 
+            int damage;
+            damage = player.WeaponDmgModifier - enemy.DmgReduction;
+            if(damage < 0)
+            {
+                damage = 1 + player.Strength;
+            }
+            else
+            {
+                damage += player.Strength;
+            }
+            
+            enemy.CurrentHealth -= damage;
+
+            return damage;
         }
     }
 }

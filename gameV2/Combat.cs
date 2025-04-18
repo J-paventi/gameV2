@@ -53,15 +53,33 @@ namespace gameV2
                     {
                         case 1:
                             Console.WriteLine("You attack!");
-                            player.PlayerAttack(player, enemy);
-                            if(enemy.CurrentHealth <= 0)
+                            int playerDmg = player.PlayerAttack(player, enemy);
+                            Console.WriteLine($"You deal {playerDmg} damage!");
+                            Console.WriteLine("Press any key to continue...");
+                            if (enemy.CurrentHealth <= 0)
                             {
                                 Console.Clear();
                                 Console.WriteLine($"You have defeated {enemy.Name}!");
                                 Console.WriteLine("Press any key to continue...");
+                                Console.ReadKey();
                                 combatFinished = true;
+                                break;
                             }
                             Console.ReadKey();
+                            Console.WriteLine($"{enemy.Name} attacks!");
+                            int damage = enemy.EnemyAttack(player, enemy);
+                            Console.WriteLine($"You take {damage} damage!");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            if(player.CurrentHealth <= 0)
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"You have been defeated by {enemy.Name}!");
+                                Console.WriteLine("Press any key to continue...");
+                                Console.ReadKey();
+                                combatFinished = true;
+                                break;
+                            }
                             break;
                         case 2:
                             Console.WriteLine("You cast a spell.");

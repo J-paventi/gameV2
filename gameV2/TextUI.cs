@@ -193,7 +193,6 @@ namespace gameV2
                 $"Health: {enemy.CurrentHealth, -3}/{enemy.MaxHealth, -21} |");
             Console.WriteLine($"| Mana: {player.CurrentMana,-3} / {player.MaxMana,-21} | {"",-33} |");
             Console.WriteLine("-------------------------------------------------------------------------");
-
         }
     }
 }
